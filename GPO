@@ -50,7 +50,7 @@ if v:IsA("Model") and v ~= game.Players.LocalPlayer.Character then
     v:WaitForChild("HumanoidRootPart").Size = Vector3.new(15,15,15)
     v:WaitForChild("HumanoidRootPart").Transparency = 0.2
     v:WaitForChild("HumanoidRootPart").Material = "Neon"
-    v:WaitForChild("HumanoidRootPart").BrickColor = BrickColor3.new(0,0,0)
+    v:WaitForChild("HumanoidRootPart").Color = Color3.new(0,0,0)
             end
         end
 end)
