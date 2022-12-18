@@ -31,7 +31,7 @@ charactertab:Toggle('TpWalk', function()
     _G.tpwalk = not _G.tpwalk
 end)
 
-charactertab:Slider('TpWalk Speed', 0, 0.5, 1, function(a)
+charactertab:Slider('TpWalk Speed', 0, 0, 10, function(a)
     _G.tpwalkSpeed = a
 end)
 loadstring(game:HttpGet('https://raw.githubusercontent.com/TempXa/Tpwalk/main/Tpwalk'))()
