@@ -1,0 +1,114 @@
+_G.tpwalk = false
+_G.tpwalkSpeed = 0
+local ts = game:GetService("TweenService")
+local swingCount = 0
+local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Linear,Enum.EasingDirection.Out)
+local farm = false
+local BlekLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/laderite/bleklib/main/library.lua"))()
+local StartUp = BlekLib:Create({
+    Name = "Sticky Hub",
+    StartupSound = {
+        Toggle = false,
+        SoundID = "rbxassetid://6958727243",
+        TimePosition = 1
+    }
+})
+
+
+local maintab = StartUp:Tab('Main')
+local charactertab = StartUp:Tab('Character')
+local uitab = StartUp:Tab('Settings')
+
+charactertab:Slider('Speed', 24, 24, 500, function(a)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = a
+end)
+
+charactertab:Slider('Jump', 50, 50, 500, function(a)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = a
+end)
+
+charactertab:Toggle('TpWalk', function()
+    _G.tpwalk = not _G.tpwalk
+end)
+
+charactertab:Slider('TpWalk Speed', 0, 0.5, 1, function(a)
+    _G.tpwalkSpeed = a
+end)
+loadstring(game:HttpGet('https://raw.githubusercontent.com/TempXa/Tpwalk/main/Tpwalk'))()
+
+uitab:Button('Destroy GUI', function()
+    StartUp:Exit()
+end)
+
+maintab:Toggle('Auto Farm(Must be near fishman mobs)', function(v)
+    farm = not farm
+end)
+
+maintab:Button('Hit Box Extender', function()
+   for i,v in pairs(game:GetService("Workspace").PlayerCharacters:GetChildren()) do
+if v:IsA("Model") and v ~= game.Players.LocalPlayer.Character then
+    v:WaitForChild("HumanoidRootPart").Size = Vector3.new(15,15,15)
+    v:WaitForChild("HumanoidRootPart").Transparency = 0.2
+    v:WaitForChild("HumanoidRootPart").Material = "Neon"
+    v:WaitForChild("HumanoidRootPart").BrickColor = BrickColor3.new(0,0,0)
+            end
+        end
+end)
+
+if game.Workspace.Islands:FindFirstChild("Fishman Island") then
+maintab:Button('Tp to Fishman', function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Skrapisismyscript/Solo_Hub/main/Loader"))()
+    end)
+end
+
+repeat wait(0.2)
+if not farm then
+    Workspace.Gravity = 196.2
+else
+workspace.Gravity = 0
+local target = game.Workspace.NPCs:WaitForChild("Fishman Karate User")
+local tween = ts:Create(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), tweenInfo, { CFrame = target:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0,8 ,0) })
+tween:Play()
+if swingCount ~= 4 then
+swingCount += 1
+print(swingCount)
+
+local args = {
+    [1] = {
+        [1] = "swingsfx",
+        [2] = "Melee",
+        [3] = swingCount,
+        [4] = "Ground"
+    }
+}
+
+game:GetService("ReplicatedStorage").Events.CombatRegister:InvokeServer(unpack(args))
+
+local args1 = {
+    [1] = {
+        [1] = "damage",
+        [2] = target.HumanoidRootPart,
+        [3] = "Melee",
+        [4] = {
+            [1] = swingCount,
+            [2] = "Ground",
+            [3] = "Melee"
+        },
+        [5] = true,
+        ["aircombo"] = "Ground"
+    }
+}
+
+game:GetService("ReplicatedStorage").Events.CombatRegister:InvokeServer(unpack(args1))
+
+local args3 = {
+    [1] = "Strength",
+    [3] = 3
+}
+
+game:GetService("ReplicatedStorage").Events.stats:FireServer(unpack(args3))
+else
+swingCount = 0
+    end
+end
+until told
