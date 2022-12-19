@@ -31,6 +31,11 @@ end)
 charactertab:Slider('TpWalk Speed', 0, 0, 10, function(a)
     _G.tpwalkSpeed = a
 end)
+
+maintab:Toggle('Auto Farm(Must be near fishman mobs)', function(v)
+    farm = not farm
+end)
+
 loadstring(game:HttpGet('https://raw.githubusercontent.com/TempXa/Tpwalk/main/Tpwalk'))()
 
 uitab:Button('Destroy GUI', function()
@@ -55,11 +60,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Skrapisismyscript/Sol
     end)
 end
 
-if game.Workspace.Islands:FindFirstChild("Fishman Island") then
-maintab:Toggle('Auto Farm(Must be near fishman mobs)', function(v)
-    farm = not farm
-    end
-end)
 
 repeat wait(0.2)
 if not farm then
