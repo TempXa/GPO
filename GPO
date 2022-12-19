@@ -20,7 +20,7 @@ local charactertab = StartUp:Tab('Character')
 local uitab = StartUp:Tab('Settings')
 local jump = false
 
-charactertab:Toogle('Inf Jump', 24, 24, 500, function(a)
+charactertab:Toogle('Inf Jump', function(a)
     jump = not jump
 end)
 
