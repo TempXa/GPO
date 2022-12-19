@@ -19,10 +19,16 @@ local maintab = StartUp:Tab('Main')
 local charactertab = StartUp:Tab('Character')
 local uitab = StartUp:Tab('Settings')
 _G.jump = false
+_G.esp = false
 
 charactertab:Toggle('Inf Jump', function()
     print("Toggled")
     _G.jump = not _G.jump
+end)
+
+charactertab:Toggle('Chest Esp', function()
+    print("Toggled")
+    _G.esp = not _G.esp
 end)
 
 charactertab:Toggle('TpWalk', function()
@@ -83,6 +89,35 @@ UIS.InputBegan:connect(function(UserInput)
         end)
     end
 end
+end)
+
+game.Workspace.Effects.ChildAdded:Connect(function(check)
+    if _G.esp then
+    if check:FindFirstChild("Lock") then
+        local lock = check:FindFirstChild("Lock")
+        if #lock:GetChildren() > 4 or #lock:GetChildren() == 2 then
+         local a = Instance.new("BillboardGui",check)
+    a.Size = UDim2.new(1,0, 1,0)
+    a.Name = "A"
+    a.AlwaysOnTop = true
+    local b = Instance.new("Frame",a)
+    b.Size = UDim2.new(1,0, 1,0)
+    b.BackgroundTransparency = 1
+    b.BorderSizePixel = 0
+    local c = Instance.new("TextLabel",b)
+    c.Size = UDim2.new(1,0, 1,0)
+    c.BackgroundTransparency = 1
+    c.BorderSizePixel = 0
+    if #lock:GetChildren() == 6 then 
+        c.Text = "Rare"
+        c.TextColor3 = Color3.new(0.84,0.04,0.12)
+    elseif #lock:GetChildren() == 2 then 
+        c.Text = "Legendary"
+        c.TextColor3 = Color3.new(0.12,0.4,0.84)
+                end
+            end
+        end
+    end
 end)
 
 repeat wait(0.2)
