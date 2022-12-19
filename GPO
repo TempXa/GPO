@@ -37,9 +37,6 @@ uitab:Button('Destroy GUI', function()
     StartUp:Exit()
 end)
 
-maintab:Toggle('Auto Farm(Must be near fishman mobs)', function(v)
-    farm = not farm
-end)
 
 maintab:Button('Hit Box Extender', function()
    for i,v in pairs(game:GetService("Workspace").PlayerCharacters:GetChildren()) do
@@ -57,6 +54,12 @@ maintab:Button('Tp to Fishman', function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Skrapisismyscript/Solo_Hub/main/Loader"))()
     end)
 end
+
+if game.Workspace.Islands:FindFirstChild("Fishman Island") then
+maintab:Toggle('Auto Farm(Must be near fishman mobs)', function(v)
+    farm = not farm
+    end
+end)
 
 repeat wait(0.2)
 if not farm then
